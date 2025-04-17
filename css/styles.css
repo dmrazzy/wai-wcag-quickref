@@ -2205,6 +2205,9 @@ header[role=banner] a:hover, header[role=banner] a:focus {
 .sc-wrapper .note {
   font-size: 0.8571428571em;
 }
+.sc-wrapper .note-title {
+  font-style: italic;
+}
 .sc-wrapper:not(.current) {
   padding: 5px;
   border: none;
@@ -2612,17 +2615,17 @@ svg.icon {
     background-color: #fff;
   }
 }
-[aria-expanded=false] .word-show {
+[data-expanded=false] .word-show {
   display: inline;
 }
-[aria-expanded=false] .word-hide {
+[data-expanded=false] .word-hide {
   display: none;
 }
 
-[aria-expanded=true] .word-show {
+[data-expanded=true] .word-show {
   display: none;
 }
-[aria-expanded=true] .word-hide {
+[data-expanded=true] .word-hide {
   display: inline;
 }
 
@@ -2792,7 +2795,7 @@ button.panel-heading {
   }
 }
 
-#pageinfo a, p > a, #contribute a {
+#pageinfo a, p > a, .sc-wrapper li > a, #contribute a {
   text-decoration: underline;
 }
 

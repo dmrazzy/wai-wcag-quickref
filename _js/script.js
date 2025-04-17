@@ -248,14 +248,16 @@ jQuery(document).ready(function($) {
   }
 
   function applyTechnologies() {
-    $('[class*=filter-tech]').show();
+    $('.panel-body li:has(a[href*="/Techniques/"])').show();
     var technologies = [];
     var uncheckedTechnologies = $('#filter-technologies input:not(:checked)');
     if (uncheckedTechnologies.length>0) {
       uncheckedTechnologies.each(function(index, el) {
         technologies.push($(el).val());
       });
-      var selector = '.filter-tech-' + technologies.join(', .filter-tech-') + '';
+      var selector = technologies.map(function (tech) {
+        return '.panel-body li:has(a[href*="/' + tech + '/"])';
+      }).join(", ");
       $(selector).hide();
       saveURL();
       statustext();
@@ -373,7 +375,6 @@ jQuery(document).ready(function($) {
   }
 
   function scrollto(target) {
-    // console.log(target);
     var location = window.history.location || window.location,
         uri = new URI(location),
         scrolldiff = 60;
@@ -655,28 +656,6 @@ jQuery(document).ready(function($) {
 
     svg4everybody();
   }
-
-  $('main').on('change', '.techniques-button input', function(event) {
-    event.preventDefault();
-    var target = $(event.target);
-    var type = target.attr('name').match(/sc-[0-9]{2,3}-(.*)/)[1];
-    if (($('.techniques-button input[name$="' + type + '"]:checked').length > 0) && ($('.techniques-button input[name$="' + type + '"]:not(:checked)').length > 0)) {
-      $('[name="filter-techniques"][value="' + type + '"]').prop('indeterminate', true);
-    } else {
-      $('[name="filter-techniques"][value="' + type + '"]').prop('indeterminate', false);
-      if ($('.techniques-button input[name$="' + type + '"]:checked').length === 0) {
-        $('[name="filter-techniques"][value="' + type + '"]').removeProp('checked');
-      }
-      if ($('.techniques-button input[name$="' + type + '"]:not(:checked)').length === 0) {
-        $('[name="filter-techniques"][value="' + type + '"]').prop('checked', "checked");
-      }
-    }
-    if(target.is(':checked')) {
-      $('#' + target.prop('name')).addClass('active');
-    } else {
-      $('#' + target.prop('name')).removeClass('active');
-    }
-  });
 
   $('main').on('click', '.techniques-button .btn-techniques', function(event) {
     var target = $(event.target),
