@@ -1,0 +1,15 @@
+{%- comment -%}
+Handles formatting for a single technique (no `using` or `and` handling).
+Expected input:
+- technique = technique object
+{%- endcomment -%}
+
+{%- if include.technique.prefix %}{{ include.technique.prefix }} {% endif -%}
+{%- if include.technique.id -%}
+  <a href="{{ site.techniqueurl }}{{ include.technique.technology }}/{{ include.technique.id }}">
+    {{- include.technique.id }}: {{ include.technique.title -}}
+  </a>
+{%- else -%}
+  {{ include.technique.title }}
+{%- endif -%}
+{%- if include.technique.suffix %} {{ include.technique.suffix }}{% endif -%}
