@@ -699,8 +699,10 @@ jQuery(document).ready(function($) {
   
   $expandAllButton.on('click', function () {
     var shouldExpand = $(this).attr('data-expanded') != 'true';
-    $('.sc-text button').attr('data-expanded', shouldExpand).parent().find('~ *:not(hr)').toggle();
-    // Synchronize URL with expanded state (this also handles .collapse state updates)
+    $('main .collapse').collapse(shouldExpand ? 'show' : 'hide');
+    $('.sc-text button').attr('data-expanded', shouldExpand).parent().find('~ *:not(hr)')[shouldExpand ? 'show' : 'hide']();
+
+    // Synchronize URL with expanded state
     var uri = getCurrentUri();
     if (shouldExpand) {
       uri.setSearch('showtechniques',
